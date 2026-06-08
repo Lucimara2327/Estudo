@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#4a3728">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Estudo Bíblico">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <title>Estudo Bíblico</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- SPLASH -->
+  <div id="splash">
+    <div class="splash-inner">
+      <div class="splash-img-wrap">
+        <img src="icon-512.png" alt="Estudo Bíblico" class="splash-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <div class="splash-emoji-fallback" style="display:none">📖</div>
+      </div>
+      <h1 class="splash-title">Estudo Bíblico</h1>
+      <p class="splash-sub">Seu assistente pessoal</p>
+    </div>
+  </div>
+
+  <!-- APP -->
+  <div id="app" style="display:none">
+
+    <!-- HEADER -->
+    <header id="header">
+      <div class="header-inner">
+        <div class="header-logo">
+          <div class="header-img-wrap">
+            <img src="icon-192.png" alt="" class="header-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="header-emoji-fallback" style="display:none">📖</span>
+          </div>
+          <div>
+            <span class="header-title">Estudo Bíblico</span>
+            <span class="header-sub">Assistente Pessoal</span>
+          </div>
+        </div>
+        <!-- Menu 3 pontinhos -->
+        <div class="header-actions">
+          <button class="icon-btn" id="menu-btn" title="Menu" aria-label="Abrir menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/>
+            </svg>
+          </button>
+        </div>
+        <!-- Dropdown Menu -->
+        <div id="dropdown-menu" class="dropdown-menu" style="display:none">
+          <button class="dropdown-item" onclick="navegarPara('notas')">
+            <span class="dropdown-icon">📝</span> Anotações
+          </button>
+          <button class="dropdown-item" onclick="navegarPara('textos')">
+            <span class="dropdown-icon">🔍</span> Buscar Textos
+          </button>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item" id="clear-chat-menu-btn">
+            <span class="dropdown-icon">🗑️</span> Limpar conversa
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- NAV TABS -->
+    <nav id="nav-tabs">
+      <button class="nav-tab active" data-tab="chat">
+        <span class="tab-icon">💬</span>
+        <span class="tab-label">Chat</span>
+      </button>
+      <button class="nav-tab" data-tab="notas">
+        <span class="tab-icon">📝</span>
+        <span class="tab-label">Anotações</span>
+      </button>
+      <button class="nav-tab" data-tab="textos">
+        <span class="tab-icon">🔍</span>
+        <span class="tab-label">Textos</span>
+      </button>
+    </nav>
+
+    <!-- CONTEÚDO -->
+    <main id="main-content">
+
+      <!-- ── TAB CHAT ── -->
+      <div id="tab-chat" class="tab-panel active">
+        <div class="chat-status-bar">
+          <div class="chat-header-info">
+            <span class="chat-status-dot"></span>
+            <span class="chat-status-text">Assistente disponível</span>
+          </div>
+        </div>
+        <div id="chat-messages" class="chat-messages">
+          <!-- Preenchido pelo JS -->
+        </div>
+        <div class="chat-input-wrap">
+          <div class="chat-input-row">
+            <textarea id="chat-input" class="chat-input" placeholder="Digite sua pergunta..." rows="1"></textarea>
+            <button id="send-btn" class="send-btn" title="Enviar">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </div>
+          <p class="chat-disclaimer">Baseado nas Escrituras e publicações das Testemunhas de Jeová</p>
+        </div>
+      </div>
+
+      <!-- ── TAB NOTAS ── -->
+      <div id="tab-notas" class="tab-panel">
+        <div class="page-header">
+          <h2 class="page-title">Minhas Anotações</h2>
+          <button class="btn-primary" id="nova-nota-btn">+ Nova</button>
+        </div>
+        <!-- Busca de anotações -->
+        <div class="notas-busca-wrap">
+          <div class="notas-busca-inner">
+            <span class="notas-busca-icon">🔍</span>
+            <input type="text" id="notas-busca" class="notas-busca-input" placeholder="Buscar anotações...">
+          </div>
+        </div>
+        <div id="notas-list" class="notas-list">
+          <!-- Preenchido pelo JS -->
+        </div>
+      </div>
+
+      <!-- ── TAB TEXTOS ── -->
+      <div id="tab-textos" class="tab-panel">
+        <div class="page-header">
+          <h2 class="page-title">Buscar Texto Bíblico</h2>
+        </div>
+        <div class="textos-wrap">
+          <p class="section-sub">Digite o livro, capítulo e versículo</p>
+          <div class="busca-input-wrap">
+            <input type="text" id="busca-input" class="busca-input" placeholder="Ex: João 3:16 ou Salmos 23">
+            <button id="busca-btn" class="btn-primary">Buscar</button>
+          </div>
+          <div class="busca-exemplos">
+            <span class="exemplo-label">Exemplos:</span>
+            <button class="exemplo-chip" onclick="buscarTexto('João 3:16')">João 3:16</button>
+            <button class="exemplo-chip" onclick="buscarTexto('Salmos 23:1')">Salmos 23:1</button>
+            <button class="exemplo-chip" onclick="buscarTexto('Provérbios 3:5')">Provérbios 3:5</button>
+            <button class="exemplo-chip" onclick="buscarTexto('Mateus 5:3')">Mateus 5:3</button>
+          </div>
+          <div id="busca-result" class="busca-result" style="display:none"></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- MODAL NOVA / EDITAR NOTA -->
+  <div id="modal-nota" class="modal" style="display:none">
+    <div class="modal-overlay" onclick="fecharModalNota()"></div>
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modal-nota-titulo">Nova Anotação</h3>
+        <button class="icon-btn modal-close-btn" onclick="fecharModalNota()">✕</button>
+      </div>
+      <input type="text" id="nota-titulo-input" class="form-input" placeholder="Título (ex: Reunião 15/06 — João 3:16)">
+      <textarea id="nota-texto-input" class="form-textarea" placeholder="Escreva sua anotação aqui..."></textarea>
+      <div class="modal-actions">
+        <button class="btn-ghost" onclick="fecharModalNota()">Cancelar</button>
+        <button class="btn-primary" onclick="salvarNota()">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL VER NOTA -->
+  <div id="modal-ver-nota" class="modal" style="display:none">
+    <div class="modal-overlay" onclick="fecharModalVerNota()"></div>
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="ver-nota-titulo">Anotação</h3>
+        <button class="icon-btn modal-close-btn" onclick="fecharModalVerNota()">✕</button>
+      </div>
+      <div id="ver-nota-data" class="ver-nota-data"></div>
+      <div id="ver-nota-texto" class="ver-nota-texto"></div>
+      <div class="modal-actions">
+        <button class="btn-ghost" id="ver-nota-edit-btn">✏️ Editar</button>
+        <button class="btn-primary" onclick="fecharModalVerNota()">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast"></div>
+
+  <script src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>
