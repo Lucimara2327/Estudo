@@ -1,0 +1,39 @@
+{
+  "name": "Estudo Bíblico",
+  "short_name": "Estudo 📖",
+  "description": "Assistente pessoal de estudo bíblico baseado nas publicações das Testemunhas de Jeová",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1a6fd4",
+  "theme_color": "#1a6fd4",
+  "lang": "pt-BR",
+  "categories": ["education", "lifestyle"],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

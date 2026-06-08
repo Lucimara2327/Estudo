@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="theme-color" content="#1a6fd4">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Estudo Bíblico">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <title>Estudo Bíblico</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- SPLASH -->
+  <div id="splash">
+    <div class="splash-inner">
+      <div class="splash-icon">📖</div>
+      <h1 class="splash-title">Estudo Bíblico</h1>
+      <p class="splash-sub">Seu assistente pessoal de estudo</p>
+    </div>
+  </div>
+
+  <!-- APP -->
+  <div id="app" style="display:none">
+    <!-- HEADER -->
+    <header id="header">
+      <div class="header-inner">
+        <div class="header-logo">
+          <span class="header-icon">📖</span>
+          <div>
+            <span class="header-title">Estudo Bíblico</span>
+            <span class="header-sub">Assistente Pessoal</span>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn" id="search-toggle" title="Buscar textos">🔍</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- NAV TABS -->
+    <nav id="nav-tabs">
+      <button class="nav-tab active" data-tab="chat">
+        <span class="tab-icon">💬</span>
+        <span class="tab-label">Chat</span>
+      </button>
+      <button class="nav-tab" data-tab="notas">
+        <span class="tab-icon">📝</span>
+        <span class="tab-label">Anotações</span>
+      </button>
+      <button class="nav-tab" data-tab="busca">
+        <span class="tab-icon">🔍</span>
+        <span class="tab-label">Textos</span>
+      </button>
+    </nav>
+
+    <!-- CONTEÚDO -->
+    <main id="main-content">
+
+      <!-- TAB CHAT -->
+      <div id="tab-chat" class="tab-panel active">
+        <div class="chat-header">
+          <div class="chat-header-info">
+            <span class="chat-status-dot"></span>
+            <span class="chat-status-text">Assistente disponível</span>
+          </div>
+          <button class="btn-ghost" id="clear-chat-btn" title="Limpar conversa">🗑️ Limpar</button>
+        </div>
+        <div id="chat-messages" class="chat-messages">
+          <div class="chat-welcome">
+            <div class="welcome-icon">🙏</div>
+            <h2 class="welcome-title">Olá! Estou aqui para ajudar no seu estudo.</h2>
+            <p class="welcome-text">Pode me perguntar sobre textos bíblicos, pedir ajuda com comentários para a reunião, ou tirar dúvidas sobre doutrinas.</p>
+            <div class="suggestions">
+              <button class="suggestion-chip" onclick="sendSuggestion('Me ajude a preparar um comentário para a reunião sobre João 3:16')">💬 Comentário para reunião</button>
+              <button class="suggestion-chip" onclick="sendSuggestion('Explique o significado de Provérbios 3:5,6')">📖 Explicar um texto</button>
+              <button class="suggestion-chip" onclick="sendSuggestion('Qual é o ensinamento bíblico sobre a ressurreição?')">❓ Dúvida doutrinária</button>
+              <button class="suggestion-chip" onclick="sendSuggestion('Me ajude a preparar o estudo pessoal da semana')">📚 Estudo pessoal</button>
+            </div>
+          </div>
+        </div>
+        <div class="chat-input-wrap">
+          <div class="chat-input-row">
+            <textarea id="chat-input" class="chat-input" placeholder="Digite sua pergunta..." rows="1"></textarea>
+            <button id="send-btn" class="send-btn" title="Enviar">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+          </div>
+          <p class="chat-disclaimer">Baseado nas Escrituras e publicações das Testemunhas de Jeová</p>
+        </div>
+      </div>
+
+      <!-- TAB NOTAS -->
+      <div id="tab-notas" class="tab-panel">
+        <div class="notas-header">
+          <h2 class="section-title">📝 Minhas Anotações</h2>
+          <button class="btn-primary" id="nova-nota-btn">+ Nova</button>
+        </div>
+        <div id="notas-list" class="notas-list">
+          <div class="empty-state">
+            <div class="empty-icon">📝</div>
+            <p>Nenhuma anotação ainda.<br>Toque em "+ Nova" para começar!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB BUSCA -->
+      <div id="tab-busca" class="tab-panel">
+        <div class="busca-wrap">
+          <h2 class="section-title">🔍 Buscar Texto Bíblico</h2>
+          <p class="section-sub">Digite o livro, capítulo e versículo</p>
+          <div class="busca-input-wrap">
+            <input type="text" id="busca-input" class="busca-input" placeholder="Ex: João 3:16 ou Salmos 23">
+            <button id="busca-btn" class="btn-primary">Buscar</button>
+          </div>
+          <div class="busca-exemplos">
+            <span class="exemplo-label">Exemplos:</span>
+            <button class="exemplo-chip" onclick="buscarTexto('João 3:16')">João 3:16</button>
+            <button class="exemplo-chip" onclick="buscarTexto('Salmos 23:1')">Salmos 23:1</button>
+            <button class="exemplo-chip" onclick="buscarTexto('Provérbios 3:5')">Provérbios 3:5</button>
+            <button class="exemplo-chip" onclick="buscarTexto('Mateus 5:3')">Mateus 5:3</button>
+          </div>
+          <div id="busca-result" class="busca-result" style="display:none"></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- MODAL NOVA NOTA -->
+  <div id="modal-nota" class="modal" style="display:none">
+    <div class="modal-overlay" onclick="fecharModalNota()"></div>
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modal-nota-titulo">Nova Anotação</h3>
+        <button class="icon-btn" onclick="fecharModalNota()">✕</button>
+      </div>
+      <input type="text" id="nota-titulo-input" class="form-input" placeholder="Título (ex: Reunião 15/06 — João 3:16)">
+      <textarea id="nota-texto-input" class="form-textarea" placeholder="Escreva sua anotação aqui..."></textarea>
+      <div class="modal-actions">
+        <button class="btn-ghost" onclick="fecharModalNota()">Cancelar</button>
+        <button class="btn-primary" onclick="salvarNota()">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast"></div>
+
+  <script src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>
