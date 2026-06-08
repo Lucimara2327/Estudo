@@ -7,7 +7,7 @@
    Cole aqui a URL da sua Supabase Edge Function depois de criar.
    Exemplo: https://xyzxyz.supabase.co/functions/v1/groq-proxy
    ---------------------------------------------------------- */
-const PROXY_URL = 'https://SEU-PROJETO.supabase.co/functions/v1/groq-proxy';
+const PROXY_URL = 'https://zwryvvhkwundyrwpamdt.supabase.co/functions/v1/groq-proxy';
 
 /* ── Sistema Prompt ── */
 const SYSTEM_PROMPT = `Você é um assistente de estudo bíblico dedicado e amigável, baseado nos ensinamentos das Testemunhas de Jeová e nas publicações da Watch Tower Bible and Tract Society (JW.org).
